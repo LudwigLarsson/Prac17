@@ -30,9 +30,8 @@ public class MainActivity2 extends AppCompatActivity {
                         mangaAuthor.getText().toString());
 
                 dataBaseHelper.addManga(group);
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                Intent intent = new Intent(MainActivity2.this, MainActivity.class);
                 startActivity(intent);
-                finish();
             }
         });
     }

@@ -56,4 +56,25 @@ public class DataBaseHelper extends SQLiteOpenHelper {
         result.close();
         return listManga;
     }
+
+    public Group getManga(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_NAME, new String[]{COLUMN_ID, COLUMN_NAME, COLUMN_AUTHOR},
+                COLUMN_ID + "=?", new String[]{String.valueOf(id)}, null, null, null, null);
+        while (cursor != null && cursor.moveToNext()) {
+            Group group = new Group(Integer.parseInt(cursor.getString(0)),
+                    cursor.getString(1), cursor.getString(2));
+            cursor.close();
+            return group;
+        }
+        if (cursor != null) {
+            cursor.close();
+        }
+        return null;
+    }
+
+    public void deleteManga(int id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_NAME, COLUMN_ID + "=?", new String[]{String.valueOf(id)});
+    }
 }

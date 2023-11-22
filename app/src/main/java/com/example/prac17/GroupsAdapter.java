@@ -1,6 +1,7 @@
 package com.example.prac17;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +36,15 @@ public class GroupsAdapter extends RecyclerView.Adapter<GroupsAdapter.ViewHolder
         Group manga = list.get(position);
         holder.mangaName.setText(manga.getManga_Name());
         holder.mangaAuthor.setText(manga.getManga_Author());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(context, InfoActivity.class);
+                intent.putExtra("id", manga.getId());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
